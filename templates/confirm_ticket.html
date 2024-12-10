@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirm Ticket</title>
+</head>
+<body>
+    <h1>Confirm Ticket Details</h1>
+    <p><b>Violation Type:</b> {{ ticket.violation_type }}</p>
+    <p><b>Amount:</b> ${{ ticket.officer_determined_amount }}</p>
+    <p><b>Location:</b> {{ ticket.location }}</p>
+    <p><b>Vehicle:</b> {{ ticket.make }} {{ ticket.model }} ({{ ticket.color }})</p>
+    <p><b>Date of Violation:</b> {{ ticket.date_time }}</p>
+    <p><b>Due Date:</b> {{ ticket.due_date }}</p>
+
+    <form method="POST" action="/violator/add_confirmed_ticket">
+        <input type="hidden" name="incident_id" value="{{ ticket.incident_id }}">
+        <button type="submit">Add to My Tickets</button>
+        <button type="button" onclick="window.location.href='/violator/dashboard'">Cancel</button>
+    </form>
+</body>
+</html>

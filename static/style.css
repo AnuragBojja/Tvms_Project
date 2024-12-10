@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px;
+    padding: 10px;
+    text-align: center;
+}
+form {
+    margin: 20px auto;
+    width: 300px;
+    text-align: left;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #45a049;
+}

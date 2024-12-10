@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Violator Dashboard</title>
+    <script>
+        function openAddTicketPopup() {
+            document.getElementById("add-ticket-popup").style.display = "block";
+        }
+
+        function closeAddTicketPopup() {
+            document.getElementById("add-ticket-popup").style.display = "none";
+        }
+
+        function togglePaidTickets() {
+            const paidTicketsSection = document.getElementById("paid-tickets-section");
+            const isHidden = paidTicketsSection.style.display === "none";
+            paidTicketsSection.style.display = isHidden ? "block" : "none";
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #000;
+            padding: 20px;
+            background-color: #fff;
+            z-index: 1000;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+        }
+
+        .ticket-card {
+            border: 1px solid #000;
+            padding: 10px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .ticket-card:hover {
+            background-color: #eaeaea;
+        }
+
+        button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        #paid-tickets-section {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ violator.first_name }} {{ violator.last_name }}</h1>
+    <p><b>Driving License:</b> {{ violator.license_number }}</p>
+
+    <!-- Add Ticket Button -->
+    <button onclick="openAddTicketPopup()">Add Ticket</button>
+    <button onclick="togglePaidTickets()">Paid Tickets</button>
+
+    <!-- Ticket List -->
+    <h2>Your Tickets</h2>
+    <div>
+        {% for ticket in tickets %}
+        <div class="ticket-card" onclick="window.location.href='/violator/ticket/{{ ticket.incident_id }}'">
+            <p><b>Violation Type:</b> {{ ticket.violation_type }}</p>
+            <p><b>Amount:</b> ${{ ticket.officer_determined_amount }}</p>
+            <p><b>Date of Violation:</b> {{ ticket.date_time }}</p>
+            <p><b>Due Date:</b> {{ ticket.due_date }}</p>
+        </div>
+        {% else %}
+        <p>No tickets found.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Parking Violations -->
+    <h2>Parking Violations</h2>
+    <div>
+        {% for parking in parking_violations %}
+        <div class="ticket-card" onclick="window.location.href='/violator/ticket/{{ parking.incident_id }}'">
+            <p><b>License Plate:</b> {{ parking.license_plate }}</p>
+            <p><b>Violation Type:</b> {{ parking.violation_type }}</p>
+            <p><b>Amount:</b> ${{ parking.officer_determined_amount }}</p>
+            <p><b>Date of Violation:</b> {{ parking.date_time }}</p>
+            <p><b>Due Date:</b> {{ parking.due_date }}</p>
+        </div>
+        {% else %}
+        <p>No parking violations found.</p>
+        {% endfor %}
+    </div> 
+
+    <!-- Paid Tickets Section -->
+    <div id="paid-tickets-section">
+        <h2>Paid Tickets</h2>
+        <div>
+            {% for ticket in paid_tickets %}
+            <div class="ticket-card">
+                <p><b>Violation Type:</b> {{ ticket.violation_type }}</p>
+                <p><b>Amount:</b> ${{ ticket.officer_determined_amount }}</p>
+                <p><b>Date of Violation:</b> {{ ticket.date_time }}</p>
+                <p><b>Due Date:</b> {{ ticket.due_date }}</p>
+            </div>
+            {% else %}
+            <p>No paid tickets found.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Add Ticket Popup -->
+    <div class="popup" id="add-ticket-popup">
+        <h3>Add Ticket</h3>
+        <form method="POST" action="/violator/lookup_ticket">
+            <label for="ticket_number">Ticket Number:</label>
+            <input type="text" id="ticket_number" name="ticket_number" required>
+            <button type="submit">Next</button>
+            <button type="button" onclick="closeAddTicketPopup()">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>

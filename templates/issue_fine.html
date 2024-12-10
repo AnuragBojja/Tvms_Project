@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Issue Fine</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h2>Issue a Fine for Incident ID: {{ incident_id }}</h2>
+    <form method="POST">
+        <label>Fine Amount:</label>
+        <input type="number" name="officer_determined_amount" step="0.01" required>
+        <label>Due Date:</label>
+        <input type="date" name="due_date" required>
+        <button type="submit">Issue Fine</button>
+    </form>
+    <a href="/officer/dashboard">Back to Dashboard</a>
+</body>
+</html>

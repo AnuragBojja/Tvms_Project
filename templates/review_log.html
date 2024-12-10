@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review Incident</title>
+</head>
+<body>
+    <h2>Review Incident</h2>
+    <p><b>Ticket Number:</b> {{ record.ticket_number }}</p>
+    <p><b>Violator Name:</b> {{ record.violator_first_name }} {{ record.violator_middle_name }} {{ record.violator_last_name }}</p>
+    <p><b>Driver's License:</b> {{ record.driver_license }}</p>
+    <p><b>License Plate:</b> {{ record.license_plate }}</p>
+    <p><b>Violation Type:</b> {{ record.violation_type }}</p>
+    <p><b>Violation Category:</b> {{ record.violation_category }}</p>
+    <p><b>Location:</b> {{ record.location }}</p>
+    <p><b>Date/Time:</b> {{ record.date_time }}</p>
+    <p><b>Description:</b> {{ record.description }}</p>
+    <p><b>Vehicle:</b> {{ record.make }} {{ record.model }} ({{ record.color }})</p>
+    <p><b>Fine Amount:</b> {{ record.officer_determined_amount }}</p>
+    <p><b>Due Date:</b> {{ record.due_date }}</p>
+
+    <a href="/officer/log?incident_id={{ record.incident_id }}"><button>Edit</button></a>
+    <button onclick="window.print()">Print</button>
+    <a href="/dashboard"><button>Return to Dashboard</button></a>
+
+</body>
+</html>

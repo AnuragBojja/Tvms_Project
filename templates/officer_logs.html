@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Officer Logs</title>
+</head>
+<body>
+    <h1>Officer Logs</h1>
+
+    <!-- Search Form -->
+    <form method="POST" action="/officer/logs">
+        <input type="text" name="search" placeholder="Search by name, license, or location">
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Logs Table -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Incident ID</th>
+                <th>Violator Name</th>
+                <th>Driver License</th>
+                <th>License Plate</th>
+                <th>Violation Type</th>
+                <th>Location</th>
+                <th>Date/Time</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if logs %}
+                {% for log in logs %}
+                    <tr>
+                        <td>{{ log.incident_id }}</td>
+                        <td>{{ log.violator_first_name }} {{ log.violator_last_name }}</td>
+                        <td>{{ log.driver_license }}</td>
+                        <td>{{ log.license_plate }}</td>
+                        <td>{{ log.violation_type }}</td>
+                        <td>{{ log.location }}</td>
+                        <td>{{ log.date_time }}</td>
+                        <td>{{ log.description }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8">No logs found.</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <button onclick="location.href='/officer/dashboard'">Back to Dashboard</button>
+</body>
+</html>

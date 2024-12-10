@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ticket Details</title>
+</head>
+<body>
+    <h1>Ticket Details</h1>
+    <p><b>Incident ID:</b> {{ ticket.incident_id }}</p>
+    <p><b>Violator Name:</b> {{ ticket.violator_first_name }} {{ ticket.violator_last_name }}</p>
+    <p><b>Driver License:</b> {{ ticket.driver_license }}</p>
+    <p><b>License Plate:</b> {{ ticket.license_plate }}</p>
+    <p><b>Violation Type:</b> {{ ticket.violation_type }}</p>
+    <p><b>Location:</b> {{ ticket.location }}</p>
+    <p><b>Date of Violation:</b> {{ ticket.date_time }}</p>
+    <p><b>Description:</b> {{ ticket.description }}</p>
+    <p><b>Vehicle:</b> {{ ticket.make }} {{ ticket.model }} ({{ ticket.color }})</p>
+    <p><b>Fine Amount:</b> ${{ ticket.officer_determined_amount }}</p>
+    <p><b>Due Date:</b> {{ ticket.due_date }}</p>
+    <p><b>Paid Status:</b> {{ ticket.paid_status }}</p>
+
+    <button onclick="location.href='/violator/dashboard'">Back to Dashboard</button>
+    {% if ticket.paid_status != 'Paid' %}
+    <button onclick="location.href='/violator/pay_ticket/{{ ticket.incident_id }}'">Pay Ticket</button>
+    {% endif %}
+    <button onclick="location.href='/violator/court_schedule/{{ ticket.incident_id }}'">Court Schedule</button>
+</body>
+</html>

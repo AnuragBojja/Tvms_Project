@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Incident</title>
+</head>
+<body>
+    <h1>Edit Incident</h1>
+    <form method="POST">
+        <label>Violation Type:</label>
+        <input type="text" name="violation_type" value="{{ incident.violation_type }}" required><br>
+        <label>Category:</label>
+        <select name="violation_category">
+            <option value="Traffic" {% if incident.violation_category == 'Traffic' %}selected{% endif %}>Traffic</option>
+            <option value="Parking" {% if incident.violation_category == 'Parking' %}selected{% endif %}>Parking</option>
+        </select><br>
+        <label>Location:</label>
+        <input type="text" name="location" value="{{ incident.location }}" required><br>
+        <label>Description:</label>
+        <textarea name="description">{{ incident.description }}</textarea><br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{{ url_for('view_incident_details', incident_id=incident.incident_id) }}">Cancel</a>
+</body>
+</html>

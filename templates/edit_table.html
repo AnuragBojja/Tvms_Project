@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit {{ table_name }}</title>
+</head>
+<body>
+    <h1>Edit {{ table_name }}</h1>
+    <form method="POST">
+        {% for key, value in record.items() %}
+        <label>{{ key }}:</label>
+        <input type="text" name="{{ key }}" value="{{ value }}">
+        <br>
+        {% endfor %}
+        <label>Description:</label>
+        <textarea name="description" placeholder="Provide a description for the changes"></textarea>
+        <br>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="/super_user/dashboard">Back to Dashboard</a>
+</body>
+</html>

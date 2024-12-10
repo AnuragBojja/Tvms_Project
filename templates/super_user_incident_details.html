@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incident Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #343a40;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 800px;
+        }
+        h2 {
+            color: #333;
+        }
+        p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Incident Details</h1>
+    </header>
+    <div class="container">
+        <h2>Incident Information</h2>
+        <p><b>Incident ID:</b> {{ incident.incident_id }}</p>
+        <p><b>Violation Type:</b> {{ incident.violation_type }}</p>
+        <p><b>Violation Category:</b> {{ incident.violation_category }}</p>
+        <p><b>Description:</b> {{ incident.description }}</p>
+        <p><b>Location:</b> {{ incident.location }}</p>
+        <p><b>Date/Time:</b> {{ incident.date_time }}</p>
+
+        <h2>Officer Information</h2>
+        <p><b>Name:</b> {{ incident.officer_first_name }} {{ incident.officer_last_name }}</p>
+        <p><b>Badge Number:</b> {{ incident.badge_number }}</p>
+        <p><b>Precinct:</b> {{ incident.precinct }}</p>
+
+        <h2>Fine Information</h2>
+        <p><b>Fine Amount:</b> ${{ incident.officer_determined_amount }}</p>
+        <p><b>Due Date:</b> {{ incident.due_date }}</p>
+        <p><b>Status:</b> {{ incident.paid_status }}</p>
+
+        <h2>Vehicle Information</h2>
+        <p><b>Make:</b> {{ incident.make }}</p>
+        <p><b>Model:</b> {{ incident.model }}</p>
+        <p><b>Color:</b> {{ incident.color }}</p>
+        <p><b>License Plate:</b> {{ incident.license_plate }}</p>
+
+        <a href="{{ url_for('view_incidents') }}">Back to All Incidents</a>
+    </div>
+</body>
+</html>

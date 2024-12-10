@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Officer Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div>
+        <h2>Welcome, {{ username }} (Badge: {{ badge_number }})</h2>
+        <p>Current Time: {{ current_time }}</p>
+        <button onclick="location.href='/logout'">Logout</button>
+    </div>
+    <div>
+        <a href="/officer/log"><button>Log New Incident</button></a>
+        <button onclick="location.href='/officer/logs'">View Logs</button>
+        <button>Emergency SOS</button>
+        <button>Support</button>
+    </div>
+</body>
+</html>

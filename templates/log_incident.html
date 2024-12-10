@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Incident</title>
+</head>
+<body>
+    <h2>Log Incident</h2>
+    <form method="POST">
+        <input type="hidden" name="incident_id" value="{{ record.incident_id if record else '' }}">
+        
+        <h3>Violator Details</h3>
+        <input type="text" name="violator_first_name" placeholder="First Name" value="{{ record.violator_first_name if record else '' }}">
+        <input type="text" name="violator_middle_name" placeholder="Middle Name" value="{{ record.violator_middle_name if record else '' }}">
+        <input type="text" name="violator_last_name" placeholder="Last Name" value="{{ record.violator_last_name if record else '' }}">
+        <input type="text" name="driver_license" placeholder="Driver's License" value="{{ record.driver_license if record else '' }}">
+        <input type="text" name="license_plate" placeholder="License Plate" value="{{ record.license_plate if record else '' }}" required>
+
+        <h3>Violation Details</h3>
+        <select name="violation_category">
+            <option value="Traffic" {% if record and record.violation_category == 'Traffic' %}selected{% endif %}>Traffic</option>
+            <option value="Parking" {% if record and record.violation_category == 'Parking' %}selected{% endif %}>Parking</option>
+        </select>
+        <input type="text" name="violation_type" placeholder="Violation Type" value="{{ record.violation_type if record else '' }}" required>
+        <input type="text" name="location" placeholder="Location" value="{{ record.location if record else '' }}" required>
+        <input type="datetime-local" name="date_time" value="{{ record.date_time|replace(' ', 'T') if record else '' }}" required>
+        <textarea name="description" placeholder="Description (2-3 lines)" rows="3">{{ record.description if record else '' }}</textarea>
+
+        <h3>Vehicle Details</h3>
+        <input type="text" name="make" placeholder="Make" value="{{ record.make if record else '' }}">
+        <input type="text" name="model" placeholder="Model" value="{{ record.model if record else '' }}">
+        <input type="text" name="color" placeholder="Color" value="{{ record.color if record else '' }}">
+
+        <h3>Fine Details</h3>
+        <input type="number" name="determined_amount" step="0.01" placeholder="Fine Amount" value="{{ record.officer_determined_amount if record else '' }}" required>
+        <input type="date" name="due_date" value="{{ record.due_date if record else '' }}" required>
+
+        <button type="submit">Log Fine</button>
+    </form>
+</body>
+</html>
